@@ -6,9 +6,6 @@ export const state = () => ({
 });
 
 export const getters = () => ({
-  woData(state){
-    return state.woData;
-  }
 });
 
 export const mutations = {

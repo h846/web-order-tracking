@@ -13,8 +13,8 @@
     }"
     dense
   >
-    <!-- 以下、列のカスタム-->
-    <!-- 9止め理由列-->
+    <!-- 以下、列のカスタム -->
+    <!-- 9止め理由列 -->
     <template v-slot:[`item.OH_HOLD_RSN`]="{ item }">
       <div v-if="item.OH_HOLD_RSN != ''">{{ item.OH_HOLD_RSN }}</div>
       <div v-else-if="item.OH_CREDIT_HOLD_RSN != ''">
@@ -24,9 +24,9 @@
     <!-- 状況列 -->
     <template v-slot:[`item.OH_STATUS`]="{ item }">
       <div v-if="item.OH_STATUS == 'P'">ピック中</div>
-      <div v-if="item.OH_STATUS == 'B'">B/O待ち</div>
-      <div v-if="item.OH_STATUS == 'O'">準備済み</div>
-      <div v-if="item.OH_STATUS == 'N'">
+      <div v-else-if="item.OH_STATUS == 'B'">B/O待ち</div>
+      <div v-else-if="item.OH_STATUS == 'O'">準備済み</div>
+      <div v-else-if="item.OH_STATUS == 'N'">
         <template
           v-if="item.OH_HOLD_RSN == '' && item.OH_CREDIT_HOLD_RSN == ''"
         >
@@ -35,16 +35,13 @@
         <template v-else> ９止め中 </template>
       </div>
     </template>
-    <!-- 楽替列-->
+    <!-- 楽替列 -->
     <template v-slot:[`item.OH_ORDER_TYPE`]="{ item }">
       <div v-if="item.OH_ORDER_TYPE == 'R'">Y</div>
     </template>
   </v-data-table>
 </template>
 <script>
-import axios from "axios";
-import moment from "moment";
-
 export default {
   data() {
     return {
@@ -105,37 +102,12 @@ export default {
       ],
     };
   },
-  mounted() {
+  created() {
     this.$store.dispatch("fetchWoData");
     this.webOrdData = this.$store.state.woData;
-    //this.getWOdata();
+    //console.log(this.webOrdData);
   },
-  methods: {
-    getWOdata: async function () {
-      await axios.post("http://lejnet/api/csnet/web-order").then((res) => {
-        this.webOrdData = res.data;
-        let date_cols = ["OH_DATE_ENTERED", "OH_DATE_ORDERED", "OH_DT_LST_MOD"];
-        this.webOrdData = this.webOrdData.map((val) => {
-          //初期整形処理
-          for (let key in val) {
-            // "null"は空文字へ
-            if (val[key] == "null" || !val[key]) {
-              val[key] = "";
-              continue;
-            }
-            //余分な空白を除去。日付型はフォーマット
-            if (date_cols.includes(key)) {
-              val[key] = moment(val[key]).format("YYYY/MM/DD");
-            } else {
-              val[key] = val[key].replace(/\s+/g, "");
-            }
-          }
-          return val;
-        });
-        console.log(this.webOrdData);
-      });
-    },
-  },
+  methods: {},
 };
 </script>
 <style scoped></style>
