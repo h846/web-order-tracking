@@ -2,15 +2,11 @@
   <v-data-table
     class="mt-5"
     :headers="headers"
+    hide-default-footer
     :items="wodata"
+    :items-per-page="-1"
     no-data-text="データがありません。"
     fixed-header
-    height="80vh"
-    :items-per-page="20"
-    :footer-props="{
-      'items-per-page-text': '行/ページ:',
-      'items-per-page-options': [10, 20, 30, 40, 50],
-    }"
     dense
   >
     <!-- 以下、列のカスタム -->
