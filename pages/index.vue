@@ -2,7 +2,7 @@
   <v-data-table
     class="mt-5"
     :headers="headers"
-    :items="webOrdData"
+    :items="wodata"
     no-data-text="データがありません。"
     fixed-header
     height="80vh"
@@ -45,7 +45,6 @@
 export default {
   data() {
     return {
-      webOrdData: [],
       headers: [
         {
           text: "オーダー日付",
@@ -104,10 +103,12 @@ export default {
   },
   created() {
     this.$store.dispatch("fetchWoData");
-    this.webOrdData = this.$store.state.woData;
-    //console.log(this.webOrdData);
   },
-  methods: {},
+  computed: {
+    wodata: function () {
+      return this.$store.state.woData;
+    },
+  },
 };
 </script>
 <style scoped></style>

@@ -1,6 +1,10 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  //パスの設定。本番環境で動かすのに必要
+  router: {
+    base: process.env.NODE_ENV === 'development' ? '/' : '/csnet/OS/WebOrderTracking/new/'
+  },
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
 
