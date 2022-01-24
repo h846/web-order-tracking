@@ -107,4 +107,13 @@ export default {
   },
 };
 </script>
-<style scoped></style>
+<style>
+.v-data-table tbody td {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 9px !important;
+}
+.v-data-table thead th {
+  font-family: "Noto Sans JP", sans-serif;
+  font-size: 9px !important;
+}
+</style>

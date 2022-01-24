@@ -3,7 +3,7 @@ import colors from 'vuetify/es5/util/colors'
 export default {
   //パスの設定。本番環境で動かすのに必要
   router: {
-    base: process.env.NODE_ENV === 'development' ? '/' : '/csnet/OS/WebOrderTracking/'
+    base: process.env.NODE_ENV === 'development' ? '/' : '/csnet/OS/WebOrderTracking/new/'
   },
   // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
   ssr: false,
@@ -31,6 +31,7 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '@/assets/css/main.css'
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
